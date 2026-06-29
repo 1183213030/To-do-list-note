@@ -1,0 +1,25 @@
+# 微信开发者工具本地配置（含个人设置，勿提交）
+project.private.config.json
+
+# 编辑器本地历史
+.history/
+
+# 依赖
+node_modules/
+miniprogram_npm/
+cloudfunctions/**/node_modules/
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

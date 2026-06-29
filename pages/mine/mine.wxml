@@ -1,0 +1,48 @@
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-avatar">👤</view>
+    <view class="user-name">{{userInfo.nickName}}</view>
+    <view class="user-id">ID: {{openid ? openid.slice(-6) : ''}}</view>
+    <view class="user-mode">当前模式：体验版私用</view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="stats-card card">
+    <view class="stats-item">
+      <view class="stats-value">{{stats.listCount}}</view>
+      <view class="stats-label">清单数量</view>
+    </view>
+    <view class="stats-divider"></view>
+    <view class="stats-item">
+      <view class="stats-value">{{stats.taskCount}}</view>
+      <view class="stats-label">事项数量</view>
+    </view>
+  </view>
+
+  <!-- 数据管理 -->
+  <view class="section-title">数据管理</view>
+  <view class="card">
+    <view class="menu-item" bindtap="onExportData">
+      <view class="menu-label">导出数据</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="onImportData">
+      <view class="menu-label">导入数据</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="section-title">设置</view>
+  <view class="card">
+    <view class="menu-item" bindtap="onClearCache">
+      <view class="menu-label">清除本地缓存</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="onAbout">
+      <view class="menu-label">关于一起待办</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+</view>

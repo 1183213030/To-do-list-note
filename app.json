@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/room-detail/room-detail",
+    "pages/join/join",
+    "pages/mine/mine",
+    "pages/import-data/import-data"
+  ],
+  "window": {
+    "navigationBarTitleText": "💌 小纸条",
+    "navigationBarBackgroundColor": "#6BA3C7",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#E8F4FD"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

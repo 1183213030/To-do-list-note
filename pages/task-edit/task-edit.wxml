@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="form">
+    <!-- 标题 -->
+    <view class="form-group">
+      <view class="form-label">标题 <text class="required">*</text></view>
+      <input class="form-input" placeholder="请输入标题" value="{{title}}" bindinput="onTitleInput" maxlength="100" />
+    </view>
+
+    <!-- 备注 -->
+    <view class="form-group">
+      <view class="form-label">备注</view>
+      <textarea class="form-textarea" placeholder="请输入备注（选填）" value="{{content}}" bindinput="onContentInput" maxlength="500" auto-height />
+    </view>
+
+    <!-- 日期 -->
+    <view class="form-group">
+      <view class="form-label">日期</view>
+      <picker mode="date" value="{{date}}" bindchange="onDateChange">
+        <view class="form-picker">
+          <text wx:if="{{date}}">{{date}}</text>
+          <text wx:else class="placeholder">选择日期（选填）</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 按钮组 -->
+  <view class="button-group">
+    <button class="btn-secondary" bindtap="onCancel">取消</button>
+    <button class="btn-primary" bindtap="onSave">保存</button>
+  </view>
+
+  <!-- 删除按钮 -->
+  <view wx:if="{{isEdit}}" class="delete-button-container">
+    <button class="btn-danger" bindtap="onDelete">删除事项</button>
+  </view>
+</view>

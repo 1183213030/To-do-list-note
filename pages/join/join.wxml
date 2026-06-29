@@ -1,0 +1,28 @@
+<view class="container">
+  <view wx:if="{{!loading && listInfo}}" class="join-card">
+    <view class="join-icon">📋</view>
+    <view class="join-title">邀请你加入</view>
+    <view class="join-list-name">{{listInfo.list.name}}</view>
+    
+    <view class="join-info">
+      <view class="join-info-item">
+        <text class="join-info-label">成员数</text>
+        <text class="join-info-value">{{listInfo.memberCount}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{!isMember}}" class="join-button-container">
+      <button class="btn-primary" bindtap="onJoinList">加入清单</button>
+    </view>
+
+    <view wx:else class="join-button-container">
+      <view class="already-member">你已经是成员了</view>
+      <button class="btn-primary" bindtap="onGoToList">进入清单</button>
+    </view>
+  </view>
+
+  <view wx:if="{{!loading && !listInfo}}" class="empty-state">
+    <view class="empty-icon">❌</view>
+    <view class="empty-text">清单不存在或已删除</view>
+  </view>
+</view>

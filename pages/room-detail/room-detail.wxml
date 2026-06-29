@@ -1,0 +1,137 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:else class="content">
+    <!-- 房间信息 -->
+    <view class="room-header card">
+      <view class="room-title-row">
+        <view class="room-code-badge">房间 {{roomInfo.roomCode}}</view>
+        <view class="room-lock" wx:if="{{roomInfo.locked}}">🔒</view>
+      </view>
+      <view class="room-stats-row">
+        <text class="stat">{{pendingCount}} 条待完成</text>
+        <text class="divider">·</text>
+        <text class="stat">{{completedCount}} 条已完成</text>
+      </view>
+      <view class="room-members-row">
+        <text class="label">成员：</text>
+        <text class="members">{{memberNames}}</text>
+      </view>
+
+      <view class="action-row" wx:if="{{!isMember}}">
+        <button class="btn-primary btn-block" bindtap="onJoinRoom">加入房间</button>
+      </view>
+    </view>
+
+    <!-- 小纸条输入 -->
+    <view class="input-section card" wx:if="{{isMember}}">
+      <textarea 
+        class="todo-input"
+        placeholder="写点什么..."
+        maxlength="200"
+        value="{{inputText}}"
+        bindinput="onInputChange"
+        adjust-position="{{true}}"
+      />
+      <view class="input-footer">
+        <text class="char-count">{{inputText.length}}/200</text>
+        <button class="btn-primary btn-small" bindtap="onAddTodo">添加</button>
+      </view>
+    </view>
+
+    <!-- 待完成列表 -->
+    <view class="todo-section" wx:if="{{isMember && pendingTodos.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">待完成</text>
+      </view>
+      <view class="todo-list">
+        <view 
+          class="todo-item card {{item.pinned ? 'pinned' : ''}}" 
+          wx:for="{{pendingTodos}}" 
+          wx:key="_id"
+        >
+          <view class="todo-left">
+            <view 
+              class="checkbox {{item.done ? 'checked' : ''}}"
+              data-id="{{item._id}}"
+              bindtap="onToggleTodo"
+            >
+              <text wx:if="{{item.done}}">✓</text>
+            </view>
+            <view class="todo-content">
+              <text class="todo-text">{{item.text}}</text>
+              <view class="todo-meta">
+                <text class="todo-author">{{item.creatorName}}</text>
+                <text class="todo-time">{{item.createdAt}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="todo-actions">
+            <view 
+              class="action-btn"
+              data-id="{{item._id}}"
+              data-pinned="{{item.pinned}}"
+              bindtap="onPinTodo"
+            >
+              {{item.pinned ? '📌' : '📍'}}
+            </view>
+            <view 
+              class="action-btn"
+              data-id="{{item._id}}"
+              bindtap="onDeleteTodo"
+            >
+              🗑️
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 已完成列表 -->
+    <view class="todo-section" wx:if="{{isMember && completedTodos.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">已完成</text>
+      </view>
+      <view class="todo-list">
+        <view 
+          class="todo-item card completed" 
+          wx:for="{{completedTodos}}" 
+          wx:key="_id"
+        >
+          <view class="todo-left">
+            <view 
+              class="checkbox checked"
+              data-id="{{item._id}}"
+              bindtap="onToggleTodo"
+            >
+              <text>✓</text>
+            </view>
+            <view class="todo-content">
+              <text class="todo-text">{{item.text}}</text>
+              <view class="todo-meta">
+                <text class="todo-author">{{item.creatorName}}</text>
+                <text class="todo-time">{{item.createdAt}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="todo-actions">
+            <view 
+              class="action-btn"
+              data-id="{{item._id}}"
+              bindtap="onDeleteTodo"
+            >
+              🗑️
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{isMember && pendingTodos.length === 0 && completedTodos.length === 0}}">
+      <view class="empty-icon">✨</view>
+      <view class="empty-text">还没有小纸条</view>
+      <view class="empty-hint">写下你的第一条吧</view>
+    </view>
+  </view>
+</view>

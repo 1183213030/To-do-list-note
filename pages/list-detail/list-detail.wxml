@@ -1,0 +1,53 @@
+<view class="container">
+  <!-- 清单信息 -->
+  <view wx:if="{{listInfo}}" class="list-header">
+    <view class="list-header-info">
+      <text class="list-header-members">成员：{{listInfo.memberCount}}人</text>
+    </view>
+    <button class="share-btn" open-type="share">邀请对象</button>
+  </view>
+
+  <!-- 未完成任务 -->
+  <view wx:if="{{pendingTasks.length > 0}}" class="section">
+    <view class="section-label">未完成</view>
+    <view class="card">
+      <view wx:for="{{pendingTasks}}" wx:key="_id" class="task-item" bindtap="onTaskTap" bindlongpress="onTaskLongPress" data-id="{{item._id}}">
+        <view class="task-check" bindtap="onToggleDone" catchtap="onToggleDone" data-id="{{item._id}}">
+          <view class="task-check-circle"></view>
+        </view>
+        <view class="task-content">
+          <view class="task-title">{{item.title}}</view>
+          <view wx:if="{{item.date}}" class="task-date">📅 {{item.date}}</view>
+          <view wx:if="{{item.content}}" class="task-note">{{item.content}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已完成任务 -->
+  <view wx:if="{{doneTasks.length > 0}}" class="section">
+    <view class="section-label">已完成</view>
+    <view class="card">
+      <view wx:for="{{doneTasks}}" wx:key="_id" class="task-item" bindtap="onTaskTap" bindlongpress="onTaskLongPress" data-id="{{item._id}}">
+        <view class="task-check done" bindtap="onToggleDone" catchtap="onToggleDone" data-id="{{item._id}}">
+          <view class="task-check-circle done">✓</view>
+        </view>
+        <view class="task-content">
+          <view class="task-title done">{{item.title}}</view>
+          <view wx:if="{{item.date}}" class="task-date done">📅 {{item.date}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{tasks.length === 0 && !loading}}" class="empty-state">
+    <view class="empty-icon">✨</view>
+    <view class="empty-text">还没有待办事项</view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-button-container">
+    <button class="btn-primary" bindtap="onAddTask">+ 添加事项</button>
+  </view>
+</view>

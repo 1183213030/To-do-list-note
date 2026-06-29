@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="tips">
+    <view class="tips-title">💡 导入说明</view>
+    <view class="tips-content">
+      1. 请粘贴从「一起待办」导出的 JSON 数据
+      2. 系统会自动校验数据格式
+      3. 只会导入你有权限的数据
+      4. 已存在的数据会根据时间判断是否更新
+    </view>
+  </view>
+
+  <view class="form">
+    <view class="form-label">导入数据</view>
+    <textarea 
+      class="form-textarea" 
+      placeholder="请粘贴导入的 JSON 数据" 
+      value="{{importJson}}" 
+      bindinput="onJsonInput"
+      auto-height
+    />
+  </view>
+
+  <view class="button-group">
+    <button class="btn-secondary" bindtap="onPasteFromClipboard">从剪贴板粘贴</button>
+    <button class="btn-primary" bindtap="onConfirmImport">确认导入</button>
+  </view>
+</view>

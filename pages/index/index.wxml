@@ -1,0 +1,55 @@
+<view class="container">
+  <!-- 顶部标题 -->
+  <view class="header">
+    <view class="logo">💌</view>
+    <view class="title">小纸条</view>
+    <view class="welcome" wx:if="{{userInfo}}">欢迎，{{userInfo.nickName}}</view>
+  </view>
+
+  <!-- 输入房间号 -->
+  <view class="card input-card">
+    <view class="input-label">输入房间号</view>
+    <view class="input-group">
+      <input 
+        class="room-input" 
+        type="number" 
+        maxlength="6"
+        placeholder="输入4-6位数字"
+        value="{{roomCode}}"
+        bindinput="onRoomCodeInput"
+      />
+    </view>
+    <view class="button-group">
+      <button class="btn-outline" bindtap="onEnterRoom">进入</button>
+      <button class="btn-primary" bindtap="onCreateRoom">创建</button>
+    </view>
+  </view>
+
+  <!-- 我的房间列表 -->
+  <view class="section-title" wx:if="{{rooms.length > 0}}">我的房间</view>
+  
+  <view class="room-list" wx:if="{{rooms.length > 0}}">
+    <view 
+      class="room-card card" 
+      wx:for="{{rooms}}" 
+      wx:key="roomId"
+      data-roomcode="{{item.roomCode}}"
+      bindtap="onRoomTap"
+    >
+      <view class="room-header">
+        <view class="room-code">房间 {{item.roomCode}}</view>
+        <view class="room-lock" wx:if="{{item.locked}}">🔒</view>
+      </view>
+      <view class="room-stats">
+        <text class="stat-item">{{item.pendingCount}} 条待完成</text>
+      </view>
+      <view class="room-members">成员：{{item.members}}</view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && rooms.length === 0}}">
+    <view class="empty-text">还没有房间</view>
+    <view class="empty-hint">创建一个房间开始使用吧</view>
+  </view>
+</view>
