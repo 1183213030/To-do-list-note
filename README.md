@@ -1,11 +1,25 @@
-# 一起待办 - 微信小程序
+# 一起待办
 
-简洁的共享清单工具，用于记录日常待办、生活事项和共同计划，支持双方查看、添加和完成事项。
+> 基于微信云开发的共享清单小程序，适合情侣、室友或家人一起记录待办、生活事项与共同计划。
 
-## 项目说明
+[![License](https://img.shields.io/badge/license-个人学习-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-微信小程序-07C160.svg)](https://developers.weixin.qq.com/miniprogram/dev/framework/)
+[![Cloud](https://img.shields.io/badge/cloud-微信云开发-006EFF.svg)](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
-本项目是一个微信小程序体验版，使用微信云开发 CloudBase，不正式发布、不上架、无广告、纯私用。
+## 简介
 
+**一起待办** 是一款轻量、无广告的微信小程序，支持多人共享同一份清单，双方可实时查看、添加和完成任务。项目使用微信云开发（CloudBase），无需自建服务器，免费额度即可运行。
+
+**适用场景：** 情侣待办、家庭购物清单、合租家务分工、两人协作的小计划。
+
+## 特性
+
+- 多人共享清单，邀请加入即可协作
+- 任务增删改查，支持日期与备注
+- 智能分组：今天 / 已计划 / 全部 / 已完成
+- 数据导出与导入，支持 JSON 备份与迁移
+- 云函数鉴权，数据安全可控
+- 无广告、无付费，纯私用体验版即可使用
 ## 技术栈
 
 - 微信小程序原生开发
@@ -42,8 +56,40 @@
 │   └── import-data/       # 数据导入页
 ├── app.js                 # 小程序入口
 ├── app.json               # 小程序配置
-└── app.wxss               # 全局样式
+├── app.wxss               # 全局样式
+├── local.config.example.js # 云环境配置示例（复制为 local.config.js）
+└── 部署指南.md             # 详细部署文档
 ```
+
+## 快速开始
+
+1. **克隆项目**
+
+```bash
+git clone https://github.com/1183213030/To-do-list-note.git
+```
+
+2. **用微信开发者工具打开项目目录**
+
+3. **配置云开发环境 ID**
+
+```bash
+cp local.config.example.js local.config.js
+```
+
+编辑 `local.config.js`，填入你的云开发环境 ID：
+
+```javascript
+module.exports = {
+  cloudEnv: 'your-env-id'  // 替换为你的环境 ID
+}
+```
+
+> `local.config.js` 已加入 `.gitignore`，不会提交到 Git，可安全保存个人配置。
+
+4. **按 [部署指南.md](./部署指南.md) 完成云开发开通、数据库创建与云函数部署**
+
+5. **编译运行**，上传体验版并添加体验成员即可使用
 
 ## 数据库集合
 
@@ -65,14 +111,7 @@
 
 ### 2. 配置环境 ID
 
-在 `app.js` 中，如果需要指定环境 ID，取消注释并填入：
-
-```javascript
-wx.cloud.init({
-  env: 'your-env-id',  // 填入你的环境 ID
-  traceUser: true
-})
-```
+复制 `local.config.example.js` 为 `local.config.js`，填入你的云开发环境 ID（详见上方「快速开始」）。
 
 ### 3. 创建数据库集合
 
@@ -205,6 +244,12 @@ wx.cloud.init({
 3. 检查云开发环境 ID 是否正确
 4. 查看云函数日志排查错误
 
+## 相关链接
+
+- [微信公众平台](https://mp.weixin.qq.com/)
+- [微信开发者工具下载](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
+- [微信云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
+
 ## 许可
 
-本项目仅供个人学习和私用，请勿用于商业用途。
+详见 [LICENSE](LICENSE)。本项目仅供个人学习和非商业私用。
