@@ -4,9 +4,16 @@ App({
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
+      let cloudEnv = 'your-env-id'
+      try {
+        const local = require('./local.config.js')
+        if (local.cloudEnv) cloudEnv = local.cloudEnv
+      } catch (e) {
+        // 未配置 local.config.js 时使用占位符，参见 local.config.example.js
+      }
+
       wx.cloud.init({
-        // 此处填入你的云开发环境 ID，参见 README.md
-        env: 'your-env-id',
+        env: cloudEnv,
         traceUser: true
       })
     }

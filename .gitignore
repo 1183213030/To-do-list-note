@@ -1,5 +1,6 @@
 # 微信开发者工具本地配置（含个人设置，勿提交）
 project.private.config.json
+local.config.js
 
 # 编辑器本地历史
 .history/
